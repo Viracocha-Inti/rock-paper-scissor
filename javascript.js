@@ -65,7 +65,7 @@ function game() {
   }
 }
 
-game();
+// game();
 
 if (userScore > compScore) {
   console.log("You won, you destroyed the computer!!!");

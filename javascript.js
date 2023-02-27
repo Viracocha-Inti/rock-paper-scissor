@@ -1,56 +1,57 @@
+const userChoiceDisplay = document.getElementById("user-choice");
+const computerChoiceDisplay = document.getElementById("computer-choice");
+const resultRoundDisplay = document.getElementById("result");
+const possibleChoices = document.querySelectorAll("button");
+
+let userScore = 0;
+let compScore = 0;
+let userChoice;
+let computerChoice;
+let roundResult;
+
+//Registers which button the user clicked
+possibleChoices.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    userChoice = e.target.id;
+    userChoiceDisplay.innerText = userChoice;
+    computerChoice = getComputerChoice();
+    computerChoiceDisplay.innerText = computerChoice;
+    roundResult = playRound();
+    resultRoundDisplay.innerText = roundResult;
+  });
+});
+
 //Function makes the computer output either rock, paper or scissors randomly for the game
-function getComputerChoice(ranNumber = Math.random()) {
-  if (ranNumber <= 0.33) {
+function getComputerChoice(ranNumber = Math.floor(Math.random() * 3) + 1) {
+  if (ranNumber == 1) {
     return "Rock";
-  } else if (ranNumber <= 0.67) {
-    return "Papper";
+  } else if (ranNumber == 2) {
+    return "Paper";
   } else {
     return "Scissor";
   }
 }
 
-//Set intial user and computer score
-let userScore = 0;
-let compScore = 0;
-
 //Function sets and establishes the rules of the game
-function playRound(userSelection, getComputerChoice) {
-  if (userSelection.toLowerCase() == "rock" && getComputerChoice == "Scissor") {
+function playRound() {
+  if (userChoice == "Rock" && computerChoice == "Scissor") {
     return "You Won";
-  } else if (
-    userSelection.toLowerCase() == "papper" &&
-    getComputerChoice == "Rock"
-  ) {
+  } else if (userChoice == "Paper" && computerChoice == "Rock") {
     return "You Won";
-  } else if (
-    userSelection.toLowerCase() == "scissor" &&
-    getComputerChoice == "Papper"
-  ) {
+  } else if (userChoice == "Scissor" && computerChoice == "Paper") {
     return "You Won";
-  } else if (
-    userSelection.toLowerCase() == "rock" &&
-    getComputerChoice == "Rock"
-  ) {
-    return "You Tied";
-  } else if (
-    userSelection.toLowerCase() == "papper" &&
-    getComputerChoice == "Papper"
-  ) {
-    return "You Tied";
-  } else if (
-    userSelection.toLowerCase() == "scissor" &&
-    getComputerChoice == "Scissor"
-  ) {
+  } else if (userChoice === computerChoice) {
     return "You Tied";
   } else {
     return "You Lose";
   }
 }
+
 //Function sets up the game and calls on the game rules as well as the computer
 //choice to determine the winner
 function game() {
   for (let i = 0; i < 5; i++) {
-    userSelection = prompt("Do you choose rock, papper or scissors?!?", "");
+    userSelection = prompt("Do you choose rock, paper or scissors?!?", "");
     const computer = getComputerChoice();
     const result = playRound(userSelection.toLowerCase(), computer);
     if (result == "You Won") {
@@ -64,8 +65,6 @@ function game() {
     }
   }
 }
-
-// game();
 
 if (userScore > compScore) {
   console.log("You won, you destroyed the computer!!!");

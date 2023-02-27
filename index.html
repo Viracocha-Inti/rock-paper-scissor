@@ -9,13 +9,26 @@
   </head>
   <body>
     <div class="header">
-      <h1>Rock-Paper-Scissor.</h1>
-      <h2>Are you brave enough to challenge the computer?!?!</h2>
+      <h1>Rock-Paper-Scissor</h1>
+      <div class="description">
+        <h2>Are you brave enough to challenge the computer?!?!</h2>
+        <h2>First to get 5 points wins the game!!</h2>
+        <h2>Each round grants you 1 point!!</h2>
+      </div>
     </div>
     <div class="buttons">
-      <button class="rock">Rock</button>
-      <button class="papper">Papper</button>
-      <button class="scissor">Scissor</button>
+      <div class="rectangleContainer">
+        <div class="buttonOvalContainer">
+          <button id="Rock">Rock</button>
+          <button id="Paper">Paper</button>
+          <button id="Scissor">Scissor</button>
+        </div>
+      </div>
+    </div>
+    <div class="results">
+      <h2>You Picked: <span id="user-choice"></span></h2>
+      <h2>Computer Picked: <span id="computer-choice"></span></h2>
+      <h2>Round Result: <span id="result"></span></h2>
     </div>
     <script src="./javascript.js"></script>
   </body>

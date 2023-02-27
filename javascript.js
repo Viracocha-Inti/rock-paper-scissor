@@ -2,12 +2,14 @@ const userChoiceDisplay = document.getElementById("user-choice");
 const computerChoiceDisplay = document.getElementById("computer-choice");
 const resultRoundDisplay = document.getElementById("result");
 const possibleChoices = document.querySelectorAll("button");
+const finalPhrase = document.getElementById("phrase");
 
 let userScore = 0;
 let compScore = 0;
 let userChoice;
 let computerChoice;
 let roundResult;
+let phrase;
 
 //Registers which button the user clicked
 possibleChoices.forEach((button) => {
@@ -18,6 +20,9 @@ possibleChoices.forEach((button) => {
     computerChoiceDisplay.innerText = computerChoice;
     roundResult = playRound();
     resultRoundDisplay.innerText = roundResult;
+    phrase = gameScore();
+    finalPhrase.innerText = phrase;
+    gameEnd();
   });
 });
 
@@ -47,35 +52,29 @@ function playRound() {
   }
 }
 
-//Function sets up the game and calls on the game rules as well as the computer
-//choice to determine the winner
-function game() {
-  for (let i = 0; i < 5; i++) {
-    userSelection = prompt("Do you choose rock, paper or scissors?!?", "");
-    const computer = getComputerChoice();
-    const result = playRound(userSelection.toLowerCase(), computer);
-    if (result == "You Won") {
-      userScore++;
-      console.log(`You scored a point! Congratulations!!`);
-    } else if (result == "You Lose") {
-      compScore++;
-      console.log("You lost a point, better luck next time!!");
-    } else {
-      console.log("You tied");
-    }
+function gameScore() {
+  if (roundResult == "You Won") {
+    userScore++;
+    return `Congratulations, you scored a point!
+    Your Score: ${userScore} Computer Score: ${compScore}`;
+  } else if (roundResult == "You Lose") {
+    compScore++;
+    return `You lost a point, better luck next time!
+    Your Score: ${userScore} Computer Score: ${compScore}`;
+  } else {
+    return `You tied. Don't give up!
+    Your Score: ${userScore} Computer Score: ${compScore}`;
   }
 }
 
-if (userScore > compScore) {
-  console.log("You won, you destroyed the computer!!!");
-  console.log("Player score: ", userScore);
-  console.log("Computer score: ", compScore);
-} else if (compScore > userScore) {
-  console.log("You Lost. Computer takeover commencing!!");
-  console.log("Player score: ", userScore);
-  console.log("Computer score: ", compScore);
-} else if (userScore == compScore) {
-  console.log("You tied, you might want to try again!!");
-  console.log("Player score: ", userScore);
-  console.log("Computer score: ", compScore);
+function gameEnd() {
+  if (userScore == 5) {
+    alert(
+      "You beat the computer!?!?! I can't believe it. Thank you for saving us!! Legend foretold of your coming, but none of us actually believed it. Thank you so much!!"
+    );
+  } else if (compScore == 5) {
+    alert(
+      "The computer prevails, god save us!! Please refresh your browser and try again. We are tired of living under its tyranny :("
+    );
+  }
 }
